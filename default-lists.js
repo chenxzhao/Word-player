@@ -13,7 +13,568 @@ const DEFAULT_LISTS = {
     { english: "jungle", phonetic: "/ˈdʒʌŋɡl/", chinese: "丛林" },
     { english: "kangaroo", phonetic: "/ˌkæŋɡəˈruː/", chinese: "袋鼠" }
   ],
-  
+  "雅思列表1": [
+    {
+       english: "ability",
+      phonetic: "/əˈbɪləti/",
+      chinese: "能力"
+    },
+    {
+       english: "acid",
+      phonetic: "/ˈæsɪd/",
+      chinese: "酸"
+    },
+    {
+       english: "adults",
+      phonetic: "/əˈdʌlts/",
+      chinese: "成年人"
+    },
+    {
+       english: "advice",
+      phonetic: "/ədˈvaɪs/",
+      chinese: "建议"
+    },
+    {
+       english: "agriculture",
+      phonetic: "/ˈæɡrɪkʌltʃər/",
+      chinese: "农业"
+    },
+    {
+       english: "allergic",
+      phonetic: "/əˈlɜːdʒɪk/",
+      chinese: "过敏的"
+    },
+    {
+       english: "altitude",
+      phonetic: "/ˈæltɪtjuːd/",
+      chinese: "高度"
+    },
+    {
+       english: "analysis",
+      phonetic: "/əˈnæləsɪs/",
+      chinese: "分析"
+    },
+    {
+       english: "ankle",
+      phonetic: "/ˈæŋkl/",
+      chinese: "脚踝"
+    },
+    {
+       english: "appearance",
+      phonetic: "/əˈpɪərəns/",
+      chinese: "外貌"
+    },
+    {
+       english: "argument",
+      phonetic: "/ˈˈɑːɡjʊmənt/",
+      chinese: "争论"
+    },
+    {
+       english: "article",
+      phonetic: "/ˈɑːtɪkl/",
+      chinese: "文章"
+    },
+    {
+       english: "audience",
+      phonetic: "/ˈɔːdiəns/",
+      chinese: "观众"
+    },
+    {
+       english: "average",
+      phonetic: "/ˈævərɪdʒ/",
+      chinese: "平均"
+    },
+    {
+       english: "bacteria",
+      phonetic: "/bækˈtɪəɹɪə/",
+      chinese: "细菌"
+    },
+    {
+       english: "baldness",
+      phonetic: "/ˈbɔːldnəs/",
+      chinese: "秃头"
+    },
+    {
+       english: "bank",
+      phonetic: "/bæŋk/",
+      chinese: "银行"
+    },
+    {
+       english: "bases",
+      phonetic: "/ˈbeɪsiːz/",
+      chinese: "基础"
+    },
+    {
+       english: "battery",
+      phonetic: "/ˈbætəri/",
+      chinese: "电池"
+    },
+    {
+       english: "beauty",
+      phonetic: "/ˈbjuːti/",
+      chinese: "美丽"
+    },
+    {
+       english: "bedsit",
+      phonetic: "/ˈbɛdsɪt/",
+      chinese: "一室公寓"
+    },
+    {
+       english: "beverage",
+      phonetic: "/ˈbɛvərɪdʒ/",
+      chinese: "饮料"
+    },
+    {
+       english: "biologist",
+      phonetic: "/baɪˈɒlədʒɪst/",
+      chinese: "生物学家"
+    },
+    {
+       english: "blast",
+      phonetic: "/blæst/",
+      chinese: "爆炸"
+    },
+    {
+       english: "boarder",
+      phonetic: "/ˈbɔːdə/",
+      chinese: "住宿生"
+    },
+    {
+       english: "bowling",
+      phonetic: "/ˈbəʊlɪŋ/",
+      chinese: "保龄球"
+    },
+    {
+       english: "bridge",
+      phonetic: "/brɪdʒ/",
+      chinese: "桥"
+    },
+    {
+       english: "burger",
+      phonetic: "/ˈbɜːɡər/",
+      chinese: "汉堡"
+    },
+    {
+       english: "abstract",
+      phonetic: "/ˈæbstrækt/",
+      chinese: "抽象的"
+    },
+    {
+       english: "action",
+      phonetic: "/ˈækʃən/",
+      chinese: "行动"
+    },
+    {
+       english: "adventure",
+      phonetic: "/ədˈvɛntʃər/",
+      chinese: "冒险"
+    },
+    {
+       english: "age",
+      phonetic: "/eɪdʒ/",
+      chinese: "年龄"
+    },
+    {
+       english: "aid",
+      phonetic: "/eɪd/",
+      chinese: "援助"
+    },
+    {
+       english: "alley",
+      phonetic: "/ˈæli/",
+      chinese: "小巷"
+    },
+    {
+       english: "ambition",
+      phonetic: "/æmˈbɪʃən/",
+      chinese: "野心"
+    },
+    {
+       english: "analyst",
+      phonetic: "/ˈænəlɪst/",
+      chinese: "分析员"
+    },
+    {
+       english: "answer",
+      phonetic: "/ˈɑːnsər/",
+      chinese: "回答"
+    },
+    {
+       english: "architect",
+      phonetic: "/ˈɑːrkɪtɛkt/",
+      chinese: "建筑师"
+    },
+    {
+       english: "aristocrat",
+      phonetic: "/ˈærɪstəkræt/",
+      chinese: "贵族"
+    },
+    {
+       english: "aspirin",
+      phonetic: "/ˈæspərɪn/",
+      chinese: "阿司匹林"
+    },
+    {
+       english: "auditorium",
+      phonetic: "/ˌɔːdɪˈtɔːrɪəm/",
+      chinese: "礼堂"
+    },
+    {
+       english: "award",
+      phonetic: "/əˈwɔːd/",
+      chinese: "奖项"
+    },
+    {
+       english: "badge",
+      phonetic: "/bædʒ/",
+      chinese: "徽章"
+    },
+    {
+       english: "band",
+      phonetic: "/bænd/",
+      chinese: "乐队"
+    },
+    {
+       english: "banquet",
+      phonetic: "/ˈbæŋkwɪt/",
+      chinese: "宴会"
+    },
+    {
+       english: "basis",
+      phonetic: "/ˈbeɪsɪs/",
+      chinese: "基础"
+    },
+    {
+       english: "beach",
+      phonetic: "/biːtʃ/",
+      chinese: "海滩"
+    },
+    {
+       english: "bed",
+      phonetic: "/bɛd/",
+      chinese: "床"
+    },
+    {
+       english: "behaviors",
+      phonetic: "/bɪˈheɪvjərz/",
+      chinese: "行为"
+    },
+    {
+       english: "bibliography",
+      phonetic: "/ˌbɪblɪˈɒɡrəfi/",
+      chinese: "参考书目"
+    },
+    {
+       english: "birds",
+      phonetic: "/bɜːdz/",
+      chinese: "鸟"
+    },
+    {
+       english: "block",
+      phonetic: "/blɒk/",
+      chinese: "阻塞"
+    },
+    {
+       english: "boat",
+      phonetic: "/bəʊt/",
+      chinese: "船"
+    },
+    {
+       english: "branch",
+      phonetic: "/bræntʃ/",
+      chinese: "树枝"
+    },
+    {
+       english: "brochures",
+      phonetic: "/broʊˈʃʊrz/",
+      chinese: "宣传册"
+    },
+    {
+       english: "burglar",
+      phonetic: "/ˈbɜːɡlər/",
+      chinese: "小偷"
+    },
+    {
+       english: "accountant",
+      phonetic: "/əˈkaʊntənt/",
+      chinese: "会计"
+    },
+    {
+       english: "activity",
+      phonetic: "/ækˈtɪvəti/",
+      chinese: "活动"
+    },
+    {
+       english: "advertisements",
+      phonetic: "/ədˈvɜːtɪzmənts/",
+      chinese: "广告"
+    },
+    {
+       english: "agency",
+      phonetic: "/ˈeɪdʒənsi/",
+      chinese: "代理机构"
+    },
+    {
+       english: "aim",
+      phonetic: "/eɪm/",
+      chinese: "目标"
+    },
+    {
+       english: "allowance",
+      phonetic: "/əˈlaʊəns/",
+      chinese: "津贴"
+    },
+    {
+       english: "ambulance",
+      phonetic: "/ˈæmbjʊləns/",
+      chinese: "救护车"
+    },
+    {
+       english: "anger",
+      phonetic: "/ˈæŋɡər/",
+      chinese: "生气"
+    },
+    {
+       english: "Antarctica",
+      phonetic: "/æntˈɑːrktɪkə/",
+      chinese: "南极洲"
+    },
+    {
+       english: "architectures",
+      phonetic: "/ˈɑːrkɪtɛktjʊrz/",
+      chinese: "建筑学"
+    },
+    {
+       english: "army",
+      phonetic: "/ˈɑːrmi/",
+      chinese: "军队"
+    },
+    {
+       english: "assignment",
+      phonetic: "/əˈsaɪnmənt/",
+      chinese: "任务"
+    },
+    {
+       english: "author",
+      phonetic: "/ˈɔːθər/",
+      chinese: "作者"
+    },
+    {
+       english: "bachelor",
+      phonetic: "/ˈbætʃələr/",
+      chinese: "学士"
+    },
+    {
+       english: "badminton",
+      phonetic: "/ˈbædmɪntən/",
+      chinese: "羽毛球"
+    },
+    {
+       english: "bandage",
+      phonetic: "/ˈbændɪdʒ/",
+      chinese: "绷带"
+    },
+    {
+       english: "base",
+      phonetic: "/beɪs/",
+      chinese: "基地"
+    },
+    {
+       english: "bath",
+      phonetic: "/bɑːθ/",
+      chinese: "浴缸"
+    },
+    {
+       english: "beard",
+      phonetic: "/bɪərd/",
+      chinese: "胡须"
+    },
+    {
+       english: "bedroom",
+      phonetic: "/ˈbɛdrʊm/",
+      chinese: "卧室"
+    },
+    {
+       english: "belt",
+      phonetic: "/bɛlt/",
+      chinese: "皮带"
+    },
+    {
+       english: "bicycle",
+      phonetic: "/ˈbaɪsɪkəl/",
+      chinese: "自行车"
+    },
+    {
+       english: "birth",
+      phonetic: "/bɜːrθ/",
+      chinese: "出生"
+    },
+    {
+       english: "blouse",
+      phonetic: "/blaʊz/",
+      chinese: "女衬衫"
+    },
+    {
+       english: "bone",
+      phonetic: "/boʊn/",
+      chinese: "骨头"
+    },
+    {
+       english: "breakfast",
+      phonetic: "/ˈbrɛkfəst/",
+      chinese: "早餐"
+    },
+    {
+       english: "building",
+      phonetic: "/ˈbɪldɪŋ/",
+      chinese: "建筑物"
+    },
+    {
+       english: "bus",
+      phonetic: "/bʌs/",
+      chinese: "公交车"
+    },
+    {
+       english: "accuracy",
+      phonetic: "/ˈækjʊrəsi/",
+      chinese: "准确性"
+    },
+    {
+       english: "actor",
+      phonetic: "/ˈæktər/",
+      chinese: "演员"
+    },
+    {
+       english: "advertising",
+      phonetic: "/ˈædvərˌtaɪzɪŋ/",
+      chinese: "广告业"
+    },
+    {
+       english: "agreement",
+      phonetic: "/əˈɡriːmənt/",
+      chinese: "协议"
+    },
+    {
+       english: "air",
+      phonetic: "/ɛər/",
+      chinese: "空气"
+    },
+    {
+       english: "alteration",
+      phonetic: "/ˌɔːltəˈreɪʃən/",
+      chinese: "改变"
+    },
+    {
+       english: "amount",
+      phonetic: "/əˈmaʊnt/",
+      chinese: "数量"
+    },
+    {
+       english: "animal",
+      phonetic: "/ˈænɪməl/",
+      chinese: "动物"
+    },
+    {
+       english: "ape",
+      phonetic: "/eɪp/",
+      chinese: "猿"
+    },
+    {
+       english: "area",
+      phonetic: "/ˈɛəɹɪə/",
+      chinese: "区域"
+    },
+    {
+       english: "art",
+      phonetic: "/ɑːrt/",
+      chinese: "艺术"
+    },
+    {
+       english: "atlas",
+      phonetic: "/ˈætləs/",
+      chinese: "地图册"
+    },
+    {
+       english: "authority",
+      phonetic: "/ɔːˈθɒrɪti/",
+      chinese: "权威"
+    },
+    {
+       english: "background",
+      phonetic: "/ˈbækɡraʊnd/",
+      chinese: "背景"
+    },
+    {
+       english: "backpack",
+      phonetic: "/ˈbækˌpæk/",
+      chinese: "背包"
+    },
+    {
+       english: "bands",
+      phonetic: "/bændz/",
+      chinese: "乐队"
+    },
+    {
+       english: "basement",
+      phonetic: "/ˈbeɪsmənt/",
+      chinese: "地下室"
+    },
+    {
+       english: "batteries",
+      phonetic: "/ˈbætəriz/",
+      chinese: "电池"
+    },
+    {
+       english: "beats",
+      phonetic: "/biːts/",
+      chinese: "节拍"
+    },
+    {
+       english: "bed-sheet",
+      phonetic: "/ˈbɛdʃiːt/",
+      chinese: "床单"
+    },
+    {
+       english: "benefit",
+      phonetic: "/ˈbɛnɪfɪt/",
+      chinese: "好处"
+    },
+    {
+       english: "bill",
+      phonetic: "/bɪl/",
+      chinese: "账单"
+    },
+    {
+       english: "blanket",
+      phonetic: "/ˈblæŋkɪt/",
+      chinese: "毯子"
+    },
+    {
+       english: "board",
+      phonetic: "/bɔːrd/",
+      chinese: "板"
+    },
+    {
+       english: "bowl",
+      phonetic: "/bəʊl/",
+      chinese: "碗"
+    },
+    {
+       english: "brick",
+      phonetic: "/brɪk/",
+      chinese: "砖"
+    },
+    {
+       english: "bungalow",
+      phonetic: "/ˈbʌŋɡəloʊ/",
+      chinese: "平房"
+    },
+    {
+        english: "cab",
+      phonetic: "/kæb/",
+      chinese: "出租车"
+    }
+  ],
   // 动物列表
   "动物列表": [
     { english: "cat", phonetic: "/kæt/", chinese: "猫" },
