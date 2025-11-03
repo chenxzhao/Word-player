@@ -67,7 +67,7 @@ self.addEventListener('fetch', (event) => {
 // 监听消息，保持Service Worker活跃
 self.addEventListener('message', (event) => {
   if (event.data === 'keepAlive') {
-    // 每10秒发送一次保活消息，防止Service Worker进入休眠
+    // 每10秒发送一次心跳，防止Service Worker休眠
     setInterval(() => {
       self.clients.matchAll({ type: 'window' }).then((clients) => {
         if (clients.length > 0) {
@@ -77,4 +77,3 @@ self.addEventListener('message', (event) => {
     }, 10000);
   }
 });
-    

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>单词发音播放器</title>
+  <title>单词发音练习</title>
   <!-- 引入外部资源 -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -130,7 +130,7 @@
 
       <button id="reset-btn" class="bg-gray-600 hover:bg-gray-700 text-white py-2 px-6 rounded-xl flex items-center justify-center gap-2 btn-hover text-sm">
         <i class="fa fa-refresh"></i>
-        <span>重置当前列表</span>
+        <span>清空当前列表</span>
       </button>
       
       <button id="show-word-list-btn" class="bg-teal-600 hover:bg-teal-700 text-white py-3 px-6 rounded-xl flex items-center justify-center gap-2 btn-hover">
@@ -261,9 +261,47 @@ computer /kəmˈpjuːtə/ 电脑
   </div>
 
   <script>
-    // 全局变量：唤醒锁和音频上下文
+    // 后台播放支持 - 唤醒锁相关
     let wakeLock = null;
     let audioContext = null;
+    
+    // 申请唤醒锁
+    async function requestWakeLock() {
+      if ('wakeLock' in navigator && !wakeLock) {
+        try {
+          wakeLock = await navigator.wakeLock.request('screen');
+          console.log('唤醒锁申请成功');
+          
+          // 监听唤醒锁释放事件，自动重新申请
+          wakeLock.addEventListener('release', () => {
+            if (isPlayingByTimes) {
+              setTimeout(requestWakeLock, 1000);
+            }
+          });
+        } catch (err) {
+          console.log('唤醒锁申请失败：', err);
+        }
+      }
+    }
+    
+    // 释放唤醒锁
+    function releaseWakeLock() {
+      if (wakeLock) {
+        wakeLock.release();
+        wakeLock = null;
+        console.log('唤醒锁已释放');
+      }
+    }
+    
+    // 激活音频上下文
+    function activateAudioContext() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+    }
     
     // 初始化数据
     function initVocabularyData() {
@@ -271,7 +309,7 @@ computer /kəmˈpjuːtə/ 电脑
       if (saved) {
         const savedData = JSON.parse(saved);
         
-        // 确保默认列表存在
+        // 检查是否有默认列表，如果没有则添加
         if (!savedData.lists["默认列表"]) {
           savedData.lists["默认列表"] = DEFAULT_LISTS["默认列表"];
         }
@@ -279,7 +317,7 @@ computer /kəmˈpjuːtə/ 电脑
         return savedData;
       }
       
-      // 如果没有保存的数据，返回默认列表
+      // 如果没有保存的数据，返回包含默认列表的数据
       return {
         lists: DEFAULT_LISTS,
         currentList: "默认列表",
@@ -298,40 +336,6 @@ computer /kəmˈpjuːtə/ 电脑
       const hint = document.getElementById('save-hint');
       hint.classList.remove('hidden');
       setTimeout(() => hint.classList.add('hidden'), 2000);
-    }
-    
-    // 申请唤醒锁
-    async function requestWakeLock() {
-      if ('wakeLock' in navigator && !wakeLock) {
-        try {
-          wakeLock = await navigator.wakeLock.request('screen');
-          // 监听唤醒锁释放事件，自动重新申请
-          wakeLock.addEventListener('release', () => {
-            if (isPlayingByTimes) requestWakeLock();
-          });
-        } catch (err) {
-          console.log('唤醒锁申请失败：', err);
-        }
-      }
-    }
-    
-    // 释放唤醒锁
-    function releaseWakeLock() {
-      if (wakeLock) {
-        wakeLock.release();
-        wakeLock = null;
-      }
-    }
-    
-    // 激活音频上下文
-    function activateAudioContext() {
-      if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      // 如果音频上下文被暂停，恢复它
-      if (audioContext.state === 'suspended') {
-        audioContext.resume();
-      }
     }
     
     // 全局变量
@@ -419,9 +423,8 @@ computer /kəmˈpjuːtə/ 电脑
       isPlayingByTimes = true;
       isPaused = false;
       
-      // 申请唤醒锁和激活音频上下文
+      // 申请唤醒锁（关键）
       requestWakeLock();
-      activateAudioContext();
       
       playTimesModal.classList.add('hidden');
       stopPlayBtn.classList.remove('hidden');
@@ -487,9 +490,8 @@ computer /kəmˈpjuːtə/ 电脑
         isPaused = false;
         pauseBtn.innerHTML = '<i class="fa fa-pause text-xl"></i><span>暂停播放</span>';
         statusIndicator.textContent = `状态：正在播放（${currentPlayTimes}/${targetPlayTimes}次）`;
-        // 继续播放时重新申请唤醒锁和激活音频上下文
+        // 继续播放时重新申请唤醒锁
         requestWakeLock();
-        activateAudioContext();
         if (currentPlayTimes < targetPlayTimes) {
           playTimeout = setTimeout(playNextTime, 500);
         }
@@ -554,7 +556,6 @@ computer /kəmˈpjuːtə/ 电脑
     
     // 打开导入弹窗
     function openImportModal() {
-      activateAudioContext(); // 激活音频上下文
       wordInput.value = vocabularyList.map(item => `${item.english}:${item.phonetic}:${item.chinese}`).join('\n');
       importModal.classList.remove('hidden');
       setTimeout(() => wordInput.focus(), 100);
@@ -613,21 +614,15 @@ computer /kəmˈpjuːtə/ 电脑
       alert(`成功导入 ${newWords.length} 个单词`);
     }
 
-    // 重置当前列表
+    // 清空当前列表
     function clearCurrentList() {
       const currentListName = vocabularyData.currentList;
       
-      // 检查当前列表是否是默认列表
-      if (currentListName === "默认列表") {
-        if (confirm(`确定要重置"${currentListName}"吗？将恢复为初始单词`)) {
-          vocabularyList = [...DEFAULT_LISTS["默认列表"]];
-          vocabularyData.lists[currentListName] = vocabularyList;
-        } else return;
-      } else {
-        if (!confirm(`确定要清空当前列表"${currentListName}"吗？`)) return;
-        vocabularyList = [];
+      // 重置为默认列表
+      if (confirm(`确定要重置"${currentListName}"吗？将恢复为初始单词`)) {
+        vocabularyList = [...DEFAULT_LISTS["默认列表"]];
         vocabularyData.lists[currentListName] = vocabularyList;
-      }
+      } else return;
       
       saveVocabularyData();
       currentIndex = 0;
@@ -676,7 +671,6 @@ computer /kəmˈpjuːtə/ 电脑
         // 绑定播放按钮事件
         const playBtn = wordItem.querySelector('.play-word-in-list');
         playBtn.addEventListener('click', () => {
-          activateAudioContext(); // 激活音频上下文
           speakWord(word.english);
         });
         
@@ -842,7 +836,6 @@ computer /kəmˈpjuːtə/ 电脑
     function openPlayTimesModal(isSettingDefault = false) {
       if (vocabularyList.length === 0 && !isSettingDefault) return;
       
-      activateAudioContext(); // 激活音频上下文
       playTimesModalTitle.textContent = isSettingDefault ? "设置默认播放次数" : "设置播放次数";
       playTimesModal.classList.remove('hidden');
       
@@ -905,14 +898,8 @@ computer /kəmˈpjuːtə/ 电脑
     });
     
     pauseBtn.addEventListener('click', togglePause);
-    prevBtn.addEventListener('click', () => {
-      activateAudioContext(); // 激活音频上下文
-      prevWord();
-    });
-    nextBtn.addEventListener('click', () => {
-      activateAudioContext(); // 激活音频上下文
-      nextWord();
-    });
+    prevBtn.addEventListener('click', prevWord);
+    nextBtn.addEventListener('click', nextWord);
     importBtn.addEventListener('click', openImportModal);
     cancelImport.addEventListener('click', closeImportModal);
     confirmImport.addEventListener('click', confirmWordImport);
@@ -966,7 +953,6 @@ computer /kəmˈpjuːtə/ 电脑
             }
           } else if (e.key === 'Enter' || e.key === ' ') { // 回车或空格播放当前单词
             e.preventDefault();
-            activateAudioContext(); // 激活音频上下文
             speakWord(vocabularyList[currentIndex].english);
           } else if (e.key === 'o' || e.key === 'O') { // O键跳转到当前选中单词并关闭列表
             e.preventDefault();
@@ -999,11 +985,9 @@ computer /kəmˈpjuːtə/ 电脑
         speakWord(vocabularyList[currentIndex].english);
       } else if (e.key === 'ArrowLeft') { // 左箭头上一个
         e.preventDefault();
-        activateAudioContext(); // 激活音频上下文
         prevWord();
       } else if (e.key === 'ArrowRight') { // 右箭头下一个
         e.preventDefault();
-        activateAudioContext(); // 激活音频上下文
         nextWord();
       } else if (e.key === 'l' || e.key === 'L') { // L默认次数播放
         e.preventDefault();
@@ -1058,4 +1042,3 @@ computer /kəmˈpjuːtə/ 电脑
   </script>
 </body>
 </html>
-    

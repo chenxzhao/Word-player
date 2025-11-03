@@ -17,8 +17,7 @@
       "type": "image/png"
     }
   ],
-  "description": "一个简单易用的单词发音播放器，帮助用户学习英语单词的发音和含义",
+  "description": "一个简单易用的单词发音播放器，支持后台播放，帮助用户学习英语单词的发音和含义",
   "orientation": "portrait-primary",
   "prefer_related_applications": false
 }
-    
